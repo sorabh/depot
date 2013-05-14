@@ -14,12 +14,16 @@
   </div>
   <div id="columns">
     <div id="side">
-      <a href="http://www...">Home</a><br>
+      <div id="cart">
+        <%= render @cart %>
+      </div>
+      <a href="http://localhost:3000">Home</a><br>
+
       <a href="http://www.../faq">Question</a><br>
       <a href="http://www.../news">News</a><br>
       <a href="http://www.../contacts">Contacts</a><br>
       <div id="time">
-        Time : <%= Time.now %>    
+        Time : <%= Time.now %>
       </div> 
     </div>
     <div id="main">
