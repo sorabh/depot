@@ -70,6 +70,24 @@ class ProductsController < ApplicationController
       end
     end
   end
+  def who_bought
+    @product = Product.find(params[:id])
+    @latest_order = @product.orders.order(:updated_at).last
+    if stale?(@latest_order)
+      respond_to do |format|
+        format.atom
+        format.xml { render :xml=>   @product.to_xml(:only => [:title , :updated_at,],:skip_type=>true,:include=> {:line_items => {
+            :skip_types => true,
+            :except => [ :created_at, :updated_at, :cart_id, :order_id ]
+        }})}
+        format.json { render :xml=>   @product.to_json(:only => [:title , :updated_at,],:skip_type=>true,:include=> {:line_items => {
+            :skip_types => true,
+            :except => [ :created_at, :updated_at, :cart_id, :order_id ]
+        }}) }
+
+      end
+    end
+  end
 
   # DELETE /products/1
   # DELETE /products/1.json

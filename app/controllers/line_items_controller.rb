@@ -45,7 +45,8 @@ class LineItemsController < ApplicationController
     @line_item = @cart.add_product(product.id,product.price)
     respond_to do |format|
       if @line_item.save
-        session[:counter] = 0
+        session[:counter] =nil
+
         format.html { redirect_to(store_url) }
         format.js   {@current_item = @line_item}
         format.xml  { render :xml => @line_item,
@@ -78,6 +79,7 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.xml
   def destroy
+    @cart = current_cart
     @line_item = LineItem.find(params[:id])
     if @line_item.quantity > 1
       @line_item.update_attributes(:quantity => @line_item.quantity - 1)
@@ -86,7 +88,7 @@ class LineItemsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(cart_url(session[:cart_id])) }
+      format.html { redirect_to(store_url) }
       format.js   {@current_item = @line_item}
       format.xml  { head :ok }
     end
