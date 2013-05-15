@@ -1,4 +1,4 @@
-class CartsController < ApplicationController
+  class CartsController < ApplicationController
   # GET /carts
   # GET /carts.json
   def index
@@ -26,7 +26,7 @@ class CartsController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html {redirect_to(store_url,:notice => "one product is deleted")}
+          format.html {redirect_to(store_url)}
           format.json { render :json => @cart }
         end
       end
@@ -91,7 +91,7 @@ class CartsController < ApplicationController
 
 
     respond_to do |format|
-      format.html { redirect_to (store_url, :notice=> 'Your cart is currently empty') }
+      format.html { redirect_to (store_url) }
       format.json { head :no_content }
     end
   end

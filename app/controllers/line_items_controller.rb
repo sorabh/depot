@@ -87,6 +87,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(cart_url(session[:cart_id])) }
+      format.js   {@current_item = @line_item}
       format.xml  { head :ok }
     end
   end
